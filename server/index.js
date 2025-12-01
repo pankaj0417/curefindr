@@ -14,7 +14,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://oncox.onrender.com",
+    origin: "https://oncox-fjdo.onrender.com",
     credentials: true,
   })
 );
