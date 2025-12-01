@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../../utils/api.js";
 
 const Signup = () => {
   const {
@@ -20,7 +21,7 @@ const Signup = () => {
     setLoading(true);
     
     try {
-      const res = await fetch("http://localhost:5000/api/user/createuser", {
+      const res = await fetch(`${API}/api/user/createuser`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

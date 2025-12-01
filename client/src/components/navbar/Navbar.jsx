@@ -55,7 +55,7 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {openMenu && (
-          <ul className="absolute top-18 left-0 w-full flex flex-col py-4 text-center bg-blue-50 text-xl shadow text-gray-500 space-y-2 md:hidden cursor-pointer  dark:bg-gray-800 dark:text-white transition-all duration-500 ">
+          <ul className="absolute top-18 left-0 w-full flex flex-col py-4 text-center bg-blue-50 text-xl shadow text-gray-500 space-y-2 md:hidden cursor-pointer  dark:bg-gray-900 dark:text-white transition-all duration-500 ">
             <li>
               <Link
                 smooth

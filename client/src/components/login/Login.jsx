@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { data, Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import API from "../../utils/api.js";
 
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/user/login", {
+      const res = await fetch(`${API}/api/user/login`, {
         method: "POST",
         
         headers: { "Content-Type": "application/json" },
