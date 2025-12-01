@@ -1,6 +1,6 @@
 # Ignore environment files
-backend/.env
-frontend/.env
+server/.env
+client/.env
 
 # Optional: Ignore OS or editor files
 .DS_Store

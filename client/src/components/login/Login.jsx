@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { data, Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import API from "../../utils/api";
+import VITE_API from "../../utils/api";
 
 
 const Login = () => {
@@ -23,8 +23,9 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API}/api/user/login`, {
+      const res = await fetch(`${VITE_API}/api/user/login`, {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: data.email,
