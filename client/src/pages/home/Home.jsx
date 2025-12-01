@@ -7,7 +7,7 @@ const Home = () => {
       <Navbar />
       <div className="min-h-screen bg-gray-100 dark:bg-gray-800 flex flex-col items-center justify-center px-6">
         <h1 className="text-6xl font-bold mb-6 text-gray-800  dark:text-white text-center">
-          On<span className="text-green-800">c</span>ox
+          On<span className="text-green-800">c</span>oX
         </h1>
 
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 text-center max-w-xl">

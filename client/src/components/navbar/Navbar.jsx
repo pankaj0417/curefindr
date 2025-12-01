@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <div className="fixed w-full md:shadow bg-blue-50 z-50  dark:bg-gray-900 dark:text-white transition-all duration-500  ">
       <nav className="flex justify-between px-8 py-4 relative rounded-2xl font-semibold">
-        <span className="text-2xl tracking-wider sm:text-3xl">On<spam className="text-green-800">cox</spam></span>
+        <span className="text-2xl tracking-wider sm:text-3xl">On<spam className="text-green-800">coX</spam></span>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center space-x-6 text-xl text-gray-500 dark:text-white cursor-pointer">

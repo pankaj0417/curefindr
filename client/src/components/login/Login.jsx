@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { data, Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import API from "../../utils/api.js";
+import API from "../../utils/api";
 
 
 const Login = () => {
