@@ -9,9 +9,9 @@ const Navbar = () => {
   const closeMenu = () => setOpenMenu(false);
 
   return (
-    <div className="fixed w-full md:shadow bg-blue-50 z-50  dark:bg-gray-900 dark:text-white transition-all duration-500  ">
+    <div className="fixed w-full md:shadow bg-blue-50 z-50  dark:bg-green-950 dark:text-white transition-all duration-500  ">
       <nav className="flex justify-between px-8 py-4 relative rounded-2xl font-semibold">
-        <h1 className="text-2xl tracking-wider sm:text-3xl">On<span className="text-green-800">coX</span></h1>
+        <h1 className="text-2xl tracking-wider sm:text-3xl">Onco<span className="text-green-800">X</span></h1>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex items-center space-x-6 text-xl text-gray-500 dark:text-white cursor-pointer">
@@ -19,7 +19,7 @@ const Navbar = () => {
             <Link
               smooth
               to="/home"
-              className="hover:text-blue-300 transition-all duration-300"
+              className="hover:text-green-700 transition-all duration-300"
             >
               Home
             </Link>
@@ -28,7 +28,7 @@ const Navbar = () => {
             <Link
               smooth
               to="/about"
-              className="hover:text-blue-300 transition-all duration-300"
+              className="hover:text-green-700 transition-all duration-300"
             >
               About
             </Link>
@@ -38,7 +38,7 @@ const Navbar = () => {
             <Link
               smooth
               to="/contact"
-              className="hover:text-blue-300 transition-all duration-300"
+              className="hover:text-green-700 transition-all duration-300"
             >
               Contact
             </Link>
@@ -55,13 +55,13 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {openMenu && (
-          <ul className="absolute top-18 left-0 w-full flex flex-col py-4 text-center bg-blue-50 text-xl shadow text-gray-500 space-y-2 md:hidden cursor-pointer  dark:bg-gray-900 dark:text-white transition-all duration-500 ">
+          <ul className="absolute top-18 left-0 w-full flex flex-col py-4 text-center bg-blue-50 text-xl shadow text-gray-500 space-y-2 md:hidden cursor-pointer  dark:bg-green-950 dark:text-white transition-all duration-500 ">
             <li>
               <Link
                 smooth
                 to="/home"
                 onClick={closeMenu}
-                className="hover:text-blue-300 transition-all duration-300"
+                className="hover:text-green-700 transition-all duration-300"
               >
                 Home
               </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
                 smooth
                 to="/about"
                 onClick={closeMenu}
-                className="hover:text-blue-300 transition-all duration-300"
+                className="hover:text-green-700 transition-all duration-300"
               >
                 About
               </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
                 smooth
                 to="/contact"
                 onClick={closeMenu}
-                className="hover:text-blue-300 transition-all duration-300"
+                className="hover:text-green-700 transition-all duration-300"
               >
                 Contact
               </Link>

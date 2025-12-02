@@ -1,7 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { useRef, useState } from "react";
 import Navbar from "../../components/navbar/Navbar.jsx";
-import contact from "../../assets/contact_img.jpg";
 
 function Contact() {
   const formRef = useRef();
@@ -31,19 +30,15 @@ function Contact() {
 
   return (
     <div><Navbar />
-    <div id="contact" className="min-h-screen bg-gray-100 dark:bg-gray-800 flex items-center justify-center px-6 py-12">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div id="contact" className="min-h-screen bg-gray-100  dark:bg-green-900 flex items-center justify-center px-6 py-12">
+      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 bg-white  rounded-2xl shadow-2xl overflow-hidden shadow-black">
         {/* Left Image */}
-        <div className="hidden md:block">
-          <img
-            src={contact}
-            alt="Contact"
-            className="w-full h-full object-cover"
-          />
+        <div className="hidden md:flex text-9xl text-white justify-center items-center bg-green-800 p-10">
+          <h1>onco<spam className="text-green-950 font-bold">X</spam></h1>
         </div>
 
         {/* Contact Form */}
-        <div className="p-10 md:p-12 flex dark:bg-gray-900 flex-col justify-center">
+        <div className="p-10 md:p-12 flex dark:bg-green-950 border-l-2 border-white  flex-col justify-center">
           <h2 className="text-3xl font-bold dark:text-white text-gray-800 mb-6">Contact Us</h2>
 
           <form ref={formRef} onSubmit={sendEmail} className="flex flex-col gap-5">
@@ -51,7 +46,7 @@ function Contact() {
               type="text"
               name="user_name"
               placeholder="Your Name"
-              className="w-full px-4 py-3 border rounded-xl dark:text-white border-gray-600   focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border rounded-xl dark:text-white border-gray-600   focus:outline-none focus:ring-2 focus:ring-white "
               required
             />
 
@@ -59,7 +54,7 @@ function Contact() {
               type="email"
               name="user_email"
               placeholder="Email Address"
-              className="w-full px-4 py-3 border rounded-xl dark:text-white border-gray-600   focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border rounded-xl dark:text-white border-gray-600   focus:outline-none focus:ring-2 focus:ring-white"
               required
             />
 
@@ -67,13 +62,13 @@ function Contact() {
               name="message"
               placeholder="Your Message"
               rows="5"
-              className="w-full px-4 py-3 border rounded-xl dark:text-white border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border rounded-xl dark:text-white border-gray-600 focus:outline-none focus:ring-2 focus:ring-white"
               required
             ></textarea>
 
             <button
               type="submit"
-              className="bg-blue-600 hover:bg-blue-700 hover:scale-105 cursor-pointer text-white font-semibold py-3 rounded-xl transition-all"
+              className="bg-green-800 hover:bg-green-900 hover:scale-105 cursor-pointer text-white font-semibold py-3 rounded-xl transition-all"
             >
               Send Message
             </button>
