@@ -58,9 +58,9 @@ const Signup = () => {
   return (
     <form
       onSubmit={handleSubmit(onsubmit)}
-      className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-gray-900 px-4"
+      className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-green-900 px-4"
     >
-      <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition duration-300">
+      <div className="w-full max-w-md bg-white dark:bg-green-950 rounded-xl shadow-lg p-8 border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition duration-300">
         {/* Alerts */}
         {errorMsg && (
           <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-3 mb-4 rounded text-center">
@@ -90,7 +90,7 @@ const Signup = () => {
               maxLength: { value: 20, message: "Max 20 characters" },
               minLength: { value: 3, message: "Min 3 characters" },
             })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white dark:text-white"
             placeholder="Enter your username"
           />
           {errors.username && (
@@ -114,7 +114,7 @@ const Signup = () => {
                 message: "Invalid email address",
               }
             })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white dark:text-white"
             placeholder="Enter your email"
           />
           {errors.email && (
@@ -134,7 +134,7 @@ const Signup = () => {
               minLength: { value: 8, message: "Minimum 8 characters" },
               maxLength: { value: 16, message: "Maximum 16 characters" },
             })}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white dark:text-white"
             placeholder="Enter your password"
           />
           {errors.password && (
@@ -151,7 +151,7 @@ const Signup = () => {
           className={`w-full py-3 rounded-lg font-semibold text-white transition duration-300 cursor-pointer ${
             loading
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg"
+              : "bg-green-800 hover:bg-green-900 shadow-xl hover:shadow-green-600 hover:scale-105"
           }`}
         >
           {loading ? "Signing up..." : "Sign Up"}

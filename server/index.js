@@ -2,6 +2,7 @@ import express from "express";
 import connectDB from "./src/config/db.js";
 import dotenv from "dotenv";
 import route from "./src/routes/userRouter.js";
+import dataRoute from "./src/routes/dataRouter.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -17,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://oncox.onrender.com"
+      "https://oncox.onrender.com",
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -26,6 +27,7 @@ app.use(
 );
 
 app.use("/api/user", route);
+app.use("/api/data", dataRoute);
 
 const port = process.env.PORT || 5000;
 

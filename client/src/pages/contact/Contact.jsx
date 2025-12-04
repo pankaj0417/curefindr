@@ -68,7 +68,7 @@ function Contact() {
 
             <button
               type="submit"
-              className="bg-green-800 hover:bg-green-900 hover:scale-105 cursor-pointer text-white font-semibold py-3 rounded-xl transition-all"
+              className="bg-green-800 hover:bg-green-900 shadow-xl hover:shadow-green-600 hover:scale-105 text-white font-semibold py-3 rounded-xl transition-all"
             >
               Send Message
             </button>
