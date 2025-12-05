@@ -21,7 +21,7 @@ const DataSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  useodrug:{
+  useofdrug:{
     type: String,
     require: true,
   },
