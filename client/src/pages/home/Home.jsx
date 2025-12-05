@@ -69,27 +69,36 @@ const Home = () => {
 
   // Fetch suggestions from backend
   const fetchSuggestions = async (query) => {
-    try {
-      const endpoint = `${VITE_API}/api/data/search?query=${encodeURIComponent(
-        query
-      )}`;
-      const res = await fetch(endpoint, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
+  try {
+    const endpoint = `${VITE_API}/api/data/search?query=${encodeURIComponent(
+      query
+    )}`;
 
-      const result = await res.json();
-      if (res.ok && result.data) {
-        // Extract unique drug names for suggestions (limit to 5)
-        const uniqueDrugs = [
-          ...new Set(result.data.map((drug) => drug.drugname)),
-        ];
-        setSuggestions(uniqueDrugs.slice(0, 2));
-      }
-    } catch (err) {
-      console.error("Error fetching suggestions:", err);
+    const res = await fetch(endpoint, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const result = await res.json();
+
+    if (res.ok && result.data) {
+      const searchLower = query.toLowerCase();
+
+      const uniqueDrugs = [
+        ...new Set(
+          result.data
+            .map((drug) => drug.drugname)
+            .filter((name) => name.toLowerCase().startsWith(searchLower))
+        ),
+      ];
+
+      setSuggestions(uniqueDrugs.slice(0, 5));
     }
-  };
+  } catch (err) {
+    console.error("Error fetching suggestions:", err);
+  }
+};
+
 
   // Handle suggestion click
   const handleSuggestionClick = (suggestion) => {
