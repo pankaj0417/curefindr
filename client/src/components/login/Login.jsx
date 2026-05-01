@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
-import { data, Link, Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import VITE_API from "../../utils/api";
 
-
 const Login = () => {
-  
   const {
     register,
     handleSubmit,
@@ -17,7 +15,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -38,10 +36,13 @@ const Login = () => {
       if (!res.ok) {
         setErrorMsg(result.message || "login failed");
       } else {
+        // Store token and user data in localStorage
+        localStorage.setItem("token", result.token);
+        localStorage.setItem("user", JSON.stringify(result.user));
         setSuccessMsg(result.message || "login successfull");
         reset();
         setTimeout(() => {
-          Navigate("/home");
+          navigate("/home");
         }, 1500);
       }
     } catch (error) {
@@ -61,7 +62,6 @@ const Login = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="min-h-screen flex justify-center items-center bg-gray-100 dark:bg-green-900 px-4 "
     >
-     
       <div className="w-full max-w-md bg-white dark:bg-green-950 rounded-xl shadow-2xl p-8 border border-gray-200 dark:border-green-950 shadow-black hover:shadow-2xl transition duration-300">
         {/* alert */}
         {errorMsg && (

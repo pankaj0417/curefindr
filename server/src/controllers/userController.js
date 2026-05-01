@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
-
 // user create // signup
 export const userCreate = async (req, res) => {
   try {
@@ -33,7 +32,6 @@ export const userCreate = async (req, res) => {
   }
 };
 
-
 // user auth // login
 export const authUser = async (req, res) => {
   try {
@@ -56,7 +54,7 @@ export const authUser = async (req, res) => {
     const token = jwt.sign(
       { userId: user._id, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     res.status(200).json({
@@ -68,11 +66,8 @@ export const authUser = async (req, res) => {
         email: user.email,
       },
     });
-
-
   } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Server error." });
   }
 };
-

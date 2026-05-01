@@ -17,9 +17,8 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const onsubmit = async (data) => {
-    
     setLoading(true);
-    
+
     try {
       const res = await fetch(`${VITE_API}/api/user/createuser`, {
         method: "POST",
@@ -112,7 +111,7 @@ const Signup = () => {
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Invalid email address",
-              }
+              },
             })}
             className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-white dark:text-white"
             placeholder="Enter your email"
