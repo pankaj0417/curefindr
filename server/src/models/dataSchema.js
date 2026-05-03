@@ -1,59 +1,65 @@
 import mongoose from "mongoose";
 
 const DataSchema = new mongoose.Schema({
-  drugname:{
+  drugname: {
     type: String,
     require: true,
   },
-  apiname:{
+  apiname: {
     type: String,
     require: true,
   },
-  group:{
+  group: {
     type: String,
     require: true,
   },
-  chemicalstructure:{
+  chemicalstructure: {
     type: String,
     require: true,
   },
-  modeofaction:{
+  modeofaction: {
     type: String,
     require: true,
   },
-  useofdrug:{
+  useofdrug: {
     type: String,
     require: true,
   },
-  toxoofdrug:{
+  toxoofdrug: {
     type: String,
     require: true,
   },
-  typeoftoxicity:{
+  typeoftoxicity: {
     type: String,
     require: true,
   },
-  reasonoftoxicity:{
+  reasonoftoxicity: {
     type: String,
     require: true,
   },
-  minconcentration:{
+  minconcentration: {
     type: String,
     require: true,
   },
-  successrate:{
+  successrate: {
     type: String,
     require: true,
   },
-  currentstatus:{
+  currentstatus: {
     type: String,
     require: true,
   },
-  adrs:{
+  adrs: {
     type: String,
     require: true,
   },
-})
+  chemicalstructureImage: {
+    type: String,
+  },
+  modeofactionImage: {
+    type: String,
+  },
+});
 
-const data=mongoose.model("data",DataSchema);
+const data = mongoose.model("data", DataSchema);
 export default data;

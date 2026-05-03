@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import sarythak_img from "../../assets/sarthak.jpeg";
 import pankaj_img from "../../assets/profile_img_front.png";
 import ashish_img from "../../assets/ashish rana.jpeg";
-
+import ayush_img from "../../assets/ayush_img.jpeg"
 const people = [
   {
     name: "Sarthak Chauhan",
@@ -13,22 +13,22 @@ const people = [
     img: sarythak_img,
   },
   {
+    name: "Ashish Rana",
+    role: "Core Team member",
+    bio: "Focuses on systematic data collection and analysis to support reliable insights.",
+    img: ashish_img,
+  },
+  {
     name: "Pankaj",
     role: "Full Stack Developer",
     bio: "Builds interactive React dashboards and visualizations for research data. Integrates ML services, builds APIs, and maintains data pipelines.",
     img: pankaj_img,
   },
   {
-    name: "Ashish Rana",
-    role: "Core Team member",
-    bio: "Develops prediction models and performs statistical analysis on FAD datasets.",
-    img: ashish_img,
-  },
-  {
-    name: "Rohit Sharma",
-    role: "Backend Engineer",
-    bio: "Integrates ML services, builds APIs, and maintains data pipelines.",
-    img: "https://via.placeholder.com/240",
+    name: "Ayush jha",
+    role: "Support Engineer",
+    bio: "Help to solve problems quickly and efficiently, ensuring a seamless experience while keeping the platform running smoothly",
+    img: ayush_img,
   },
 ];
 function About() {

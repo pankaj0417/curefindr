@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar.jsx";
@@ -8,14 +8,71 @@ const Upload = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     reset,
     formState: { errors },
   } = useForm();
 
   const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [imagePreview, setImagePreview] = useState({
+    chemicalstructure: null,
+    modeofaction: null,
+  });
   const navigate = useNavigate();
+
+  // Image state
+  const [chemicalstructureImage, setChemicalstructureImage] = useState(null);
+  const [modeofactionImage, setModeofactionImage] = useState(null);
+
+  const uploadImage = useCallback(
+    async (file, type) => {
+      if (!file) return;
+
+      setUploadingImage(true);
+      const formData = new FormData();
+      formData.append("image", file);
+
+      try {
+        const res = await fetch(`${VITE_API}/api/data/upload-image`, {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.message || "Upload failed");
+        }
+
+        // Set the URL in form and state
+        if (type === "chemicalstructure") {
+          setValue("chemicalstructureImage", result.url);
+          setImagePreview((prev) => ({
+            ...prev,
+            chemicalstructure: URL.createObjectURL(file),
+          }));
+        } else {
+          setValue("modeofactionImage", result.url);
+          setImagePreview((prev) => ({
+            ...prev,
+            modeofaction: URL.createObjectURL(file),
+          }));
+        }
+
+        setSuccessMsg(`Image uploaded: ${result.url}`);
+      } catch (error) {
+        setErrorMsg(error.message || "Image upload failed");
+      } finally {
+        setUploadingImage(false);
+      }
+    },
+    [setValue],
+  );
 
   const onSubmit = async (data) => {
     setLoading(true);
@@ -35,18 +92,14 @@ const Upload = () => {
       } else {
         setSuccessMsg(result.message || "Data uploaded successfully!");
         reset();
-        setTimeout(() => {
-          setSuccessMsg("");
-        }, 3000);
+        setImagePreview({ chemicalstructure: null, modeofaction: null });
+        setTimeout(() => setSuccessMsg(""), 3000);
       }
     } catch (error) {
-      setErrorMsg("⚠️ Network error. Please try again.");
-      console.error("Error uploading data:", error);
+      setErrorMsg("Network error. Please try again.");
     } finally {
       setLoading(false);
-      setTimeout(() => {
-        setErrorMsg("");
-      }, 5000);
+      setTimeout(() => setErrorMsg(""), 5000);
     }
   };
 
@@ -62,7 +115,6 @@ const Upload = () => {
             Upload Drug Data
           </h1>
 
-          {/* Alerts */}
           {errorMsg && (
             <div className="bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 p-3 mb-4 rounded text-center">
               {errorMsg}
@@ -76,10 +128,75 @@ const Upload = () => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-white dark:bg-green-950 rounded-xl shadow-2xl p-6 md:p-8 space-y-4"
+            className="bg-white dark:bg-green-950 rounded-xl shadow-2xl p-6 md:p-8 space-y-6"
           >
+            {/* Image Upload Section */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white border-b pb-2">
+                📸 Image Upload
+              </h2>
+
+              {/* Chemical Structure Image */}
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2 font-semibold">
+                  Chemical Structure Image *
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    setChemicalstructureImage(file);
+                    uploadImage(file, "chemicalstructure");
+                  }}
+                  className="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg focus:outline-none focus:border-green-500 bg-gray-50 dark:bg-green-900/50 dark:border-gray-600"
+                />
+                {imagePreview.chemicalstructure && (
+                  <div className="mt-2">
+                    <img
+                      src={imagePreview.chemicalstructure}
+                      alt="Preview"
+                      className="max-w-xs max-h-48 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-sm text-green-600 mt-1">
+                      URL: {watch("chemicalstructureImage")}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Mode of Action Image */}
+              <div>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2 font-semibold">
+                  Mechanism of Action *
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    setModeofactionImage(file);
+                    uploadImage(file, "modeofaction");
+                  }}
+                  className="w-full px-4 py-2 border-2 border-dashed border-gray-300 rounded-lg focus:outline-none focus:border-green-500 bg-gray-50 dark:bg-green-900/50 dark:border-gray-600"
+                />
+                {imagePreview.modeofaction && (
+                  <div className="mt-2">
+                    <img
+                      src={imagePreview.modeofaction}
+                      alt="Preview"
+                      className="max-w-xs max-h-48 object-contain rounded-lg shadow-md"
+                    />
+                    <p className="text-sm text-green-600 mt-1">
+                      URL: {watch("modeofactionImage")}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Form Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Drug Name */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Drug Name *
@@ -99,7 +216,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* API Name */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   API Name *
@@ -117,7 +233,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Group/Class */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Group/Class *
@@ -133,7 +248,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Chemical Structure */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Chemical Structure *
@@ -153,17 +267,16 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Mode of Action */}
               <div className="md:col-span-2">
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
-                  Mode of Action *
+                  Mechanism of Action *
                 </label>
                 <textarea
                   {...register("modeofaction", {
                     required: "Mode of action is required",
                   })}
                   className={`${inputClass} h-24`}
-                  placeholder="Describe the mode of action"
+                  placeholder="Describe the mechanism of action"
                 />
                 {errors.modeofaction && (
                   <p className="text-red-500 text-sm">
@@ -172,7 +285,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Use of Drug */}
               <div className="md:col-span-2">
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Use of Drug *
@@ -191,7 +303,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Toxophore of Drug */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Toxophore of Drug *
@@ -211,7 +322,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Type of Toxicity */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Type of Toxicity *
@@ -231,7 +341,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Reason of Toxicity */}
               <div className="md:col-span-2">
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Reason of Toxicity *
@@ -250,7 +359,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Minimum Concentration */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Minimum Concentration *
@@ -270,10 +378,9 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Success Rate */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
-                  Success Rate *
+                   Response Rate *
                 </label>
                 <input
                   type="text"
@@ -290,10 +397,9 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* Current Status */}
               <div>
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
-                  Current Status *
+                  Clinical Efficacy *
                 </label>
                 <input
                   {...register("currentstatus", {
@@ -302,8 +408,6 @@ const Upload = () => {
                   className={inputClass}
                   placeholder="Enter status"
                 />
-                  
-                
                 {errors.currentstatus && (
                   <p className="text-red-500 text-sm">
                     {errors.currentstatus.message}
@@ -311,7 +415,6 @@ const Upload = () => {
                 )}
               </div>
 
-              {/* ADRs */}
               <div className="md:col-span-2">
                 <label className="block text-gray-700 dark:text-gray-300 mb-1">
                   Adverse Drug Reactions (ADRs) *
@@ -327,7 +430,6 @@ const Upload = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <div className="pt-4">
               <button
                 type="submit"
